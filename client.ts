@@ -6,6 +6,9 @@ import { Sha256 } from "@aws-crypto/sha256-js";
 import { HttpRequest } from "@smithy/types";
 import { request } from "gaxios";
 
+/**
+  We sets the baseUrl and default X-Vault-Request to tell Vault that this is a request with a Vault token to access token
+**/
 const defaults = {
   baseURL: process.env.BASE_URL,
   headers: {
@@ -13,6 +16,10 @@ const defaults = {
     "User-Agent": "VAULTCLIENT",
   },
 };
+/**
+This is a built in util function from AWS to create a signed request based on their specs
+https://docs.aws.amazon.com/IAM/latest/UserGuide/create-signed-request.html
+**/
 async function getSignedRequest() {
   const credential = defaultProvider();
   const request = await createRequest(
@@ -31,6 +38,9 @@ async function getSignedRequest() {
   return signedRequest;
 }
 
+/**
+The request body to send to Vault with AWS authentication
+**/
 function getVaultAuthRequestBody(stsRequest: HttpRequest) {
   const googleLikeHeaders = {};
   for (const e of Object.entries(stsRequest.headers)) {
@@ -50,6 +60,9 @@ function getVaultAuthRequestBody(stsRequest: HttpRequest) {
   };
 }
 
+/**
+The request to send to Vault to retrieve GCP token based on Vault API
+**/
 async function getGcpToken(vaultToken: string) {
   const res = await request({
     ...defaults,
@@ -62,7 +75,9 @@ async function getGcpToken(vaultToken: string) {
   });
   return res.data["data"]["token"];
 }
-
+/**
+This request sends to Vault to authenticate with AWS credential
+**/
 async function getVaultAuthToken(postData: string) {
   const res = await request({
     ...defaults,

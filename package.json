@@ -1,0 +1,116 @@
+{
+  "name": "digital-vals-apigee-attributes",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "build": "npm run clean && tsc --build tsconfig.build.json",
+    "format:doc": "prettier --write \"docs/**/*.md\" *.md",
+    "clean": "rm -rf ./dist && tsc --build --clean",
+    "test": "jest --coverage --watchAll",
+    "test:ci": "jest --coverage --ci --watchAll=false",
+    "lint": "eslint lambda/**/*.ts --fix",
+    "lint:test": "eslint lambda/**/*.ts --max-warnings 0",
+    "prepare": "husky install"
+  },
+  "author": "explorers",
+  "license": "ISC",
+  "devDependencies": {
+    "@aws-sdk/client-s3": "^3.131.0",
+    "@aws-sdk/lib-storage": "^3.131.0",
+    "@faker-js/faker": "^8.0.0",
+    "@types/aws-lambda": "^8.10.109",
+    "@types/jest": "^29.4.0",
+    "@types/node": "^20.0.0",
+    "@types/node-fetch": "^2.6.9",
+    "@typescript-eslint/eslint-plugin": "^7.0.0",
+    "@typescript-eslint/parser": "^7.0.0",
+    "eslint": "8.57.0",
+    "eslint-config-prettier": "^9.0.0",
+    "eslint-plugin-prettier": "^5.0.0",
+    "husky": "^9.0.0",
+    "jest": "^29.4.1",
+    "jest-sonar-reporter": "^2.0.0",
+    "lint-staged": "^15.2.0",
+    "ts-jest": "^29.0.5",
+    "typescript": "^5.0.0"
+  },
+  "dependencies": {
+    "@aws-crypto/sha256-js": "^5.2.0",
+    "@aws-sdk/client-sts": "^3.451.0",
+    "@aws-sdk/credential-provider-node": "^3.451.0",
+    "@aws-sdk/util-create-request": "^3.451.0",
+    "@smithy/signature-v4": "^3.0.0",
+    "dayjs": "^1.11.10",
+    "gaxios": "^6.1.1",
+    "ndjson": "^2.0.0"
+  },
+  "publishConfig": {
+    "registry": "https://npm.pkg.github.com"
+  },
+  "jest": {
+    "preset": "ts-jest",
+    "testEnvironment": "node",
+    "moduleFileExtensions": [
+      "js",
+      "json",
+      "ts"
+    ],
+    "moduleDirectories": [
+      "node_modules"
+    ],
+    "modulePaths": [
+      "<rootDir>"
+    ],
+    "roots": [
+      "<rootDir>"
+    ],
+    "testRegex": [
+      ".*\\.spec\\.ts$"
+    ],
+    "transformIgnorePatterns": [
+      "[/\\\\]node_modules[/\\\\].+\\.(js|jsx|mjs|cjs|ts|tsx)$"
+    ],
+    "coveragePathIgnorePatterns": [
+      "<rootDir>/src/index.ts",
+      "<rootDir>/src/types",
+      "<rootDir>/src/utils"
+    ],
+    "transform": {
+      "^.+\\.(t|j)s$": "ts-jest"
+    },
+    "collectCoverageFrom": [
+      "src/**/*.{js,jsx,ts,tsx}",
+      "test/**/*.{js,jsx,ts,tsx}"
+    ],
+    "clearMocks": true,
+    "coverageDirectory": "coverage",
+    "testResultsProcessor": "jest-sonar-reporter",
+    "coverageThreshold": {
+      "global": {
+        "statements": 95,
+        "branches": 95,
+        "functions": 95,
+        "lines": 95
+      }
+    }
+  },
+  "jestSonar": {
+    "reportPath": "coverage",
+    "reportFile": "test-report.xml",
+    "indent": 4
+  },
+  "prettier": {
+    "singleQuote": true,
+    "trailingComma": "all",
+    "printWidth": 80,
+    "overrides": [
+      {
+        "files": ["*.yaml", "*.yml"],
+        "options": {
+          "singleQuote": false
+        }
+      }
+    ]
+  }
+}

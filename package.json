@@ -10,7 +10,7 @@
     "test": "jest --coverage --watchAll",
     "test:ci": "jest --coverage --ci --watchAll=false",
     "lint": "eslint lambda/**/*.ts --fix",
-    "lint:test": "eslint lambda/**/*.ts --max-warnings 0",
+    "lint:test": "eslint lambda/**/*.ts --max-warnings 0"
   },
   "author": "explorers",
   "license": "ISC",

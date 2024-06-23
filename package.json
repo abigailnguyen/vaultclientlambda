@@ -11,7 +11,6 @@
     "test:ci": "jest --coverage --ci --watchAll=false",
     "lint": "eslint lambda/**/*.ts --fix",
     "lint:test": "eslint lambda/**/*.ts --max-warnings 0",
-    "prepare": "husky install"
   },
   "author": "explorers",
   "license": "ISC",

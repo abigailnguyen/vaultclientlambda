@@ -2,9 +2,10 @@
   "name": "@abigailnguyen/vaultclientlambda",
   "version": "1.0.0",
   "description": "��#\u0000 \u0000v\u0000a\u0000u\u0000l\u0000t\u0000c\u0000l\u0000i\u0000e\u0000n\u0000t\u0000l\u0000a\u0000m\u0000b\u0000d\u0000a\u0000\r\u0000 \u0000",
-  "main": "index.js",
+  "main": "./dist/index.js",
   "scripts": {
     "build": "npm run clean && tsc --build tsconfig.build.json",
+    "build:tsup": "tsup",
     "format:doc": "prettier --write \"docs/**/*.md\" *.md",
     "clean": "rm -rf ./dist && tsc --build --clean",
     "test": "jest --coverage --watchAll",
@@ -20,7 +21,6 @@
   "devDependencies": {
     "@aws-sdk/client-s3": "^3.131.0",
     "@aws-sdk/lib-storage": "^3.131.0",
-    "@faker-js/faker": "^8.0.0",
     "@types/aws-lambda": "^8.10.109",
     "@types/jest": "^29.4.0",
     "@types/node": "^20.0.0",
@@ -35,7 +35,9 @@
     "jest-sonar-reporter": "^2.0.0",
     "lint-staged": "^15.2.0",
     "ts-jest": "^29.0.5",
-    "typescript": "^5.0.0"
+    "ts-node": "^10.9.2",
+    "tsup": "^8.1.0",
+    "typescript": "^5.5.2"
   },
   "dependencies": {
     "@aws-crypto/sha256-js": "^5.2.0",
@@ -128,5 +130,10 @@
   "bugs": {
     "url": "https://github.com/abigailnguyen/vaultclientlambda/issues"
   },
-  "homepage": "https://github.com/abigailnguyen/vaultclientlambda#readme"
+  "homepage": "https://github.com/abigailnguyen/vaultclientlambda#readme",
+  "module": "./dist/index.mjs",
+  "types": "./dist/index.d.ts",
+  "files": [
+    "dist"
+  ]
 }
